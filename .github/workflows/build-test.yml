@@ -1,0 +1,30 @@
+name: Build and Test
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    name: Buld & Test
+    runs-on: [self-hosted, ostad-runner]
+
+    steps:
+      - name: Check Runner
+        run: |
+          echo "Runner is working!"
+          hostname
+          whoami
+          node --version
+          npm --version
+
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Build
+        run: npm run build
+
+      - name: Test
+        run: npm test
